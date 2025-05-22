@@ -1,0 +1,49 @@
+{
+  "project_info": {
+    "project_number": "520142220218",
+    "firebase_url": "https://ones-3f249-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "ones-3f249",
+    "storage_bucket": "ones-3f249.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:520142220218:android:f998a70f990176a7590b83",
+        "android_client_info": {
+          "package_name": "com.example.last"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCtEsizlXwFSOtaWGb_Bm0iZ_KpGKKbLC4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:520142220218:android:78684742ebf445e9590b83",
+        "android_client_info": {
+          "package_name": "com.example.whydonthavegroovy"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCtEsizlXwFSOtaWGb_Bm0iZ_KpGKKbLC4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
