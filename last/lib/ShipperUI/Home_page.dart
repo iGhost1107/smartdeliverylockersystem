@@ -147,10 +147,22 @@ class _HomePageState extends State<HomePage> {
         actions: [
           ElevatedButton(
             onPressed: () async {
+              print('Button was pressed!');
+
               final customerPhone = customerPhoneController.text.trim();
               final lockerLocation = lockerLocationController.text.trim();
 
               if (customerPhone.isNotEmpty && lockerLocation.isNotEmpty) {
+
+                final slotId = await fireStoreService.getAvailableLockerId(
+                  lockerLocation,
+                  selectedSize,
+                );
+
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text('Slot $slotId selected. Opening now…')),
+                );
+
                 // Show loading dialog
                 showDialog(
                   context: context,
@@ -173,11 +185,12 @@ class _HomePageState extends State<HomePage> {
                   'shipperPhone': widget.shipperPhone,
                 });
 
-                Navigator.of(context, rootNavigator: true).pop(); // Close loading
+                // Close the loading dialog
+                Navigator.of(context, rootNavigator: true).pop();
 
                 if (result != null) {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text(result)),
+                    SnackBar(content: Text(result)), // show error message
                   );
                 } else {
                   ScaffoldMessenger.of(context).showSnackBar(
@@ -186,14 +199,65 @@ class _HomePageState extends State<HomePage> {
                   customerPhoneController.clear();
                   lockerLocationController.clear();
                   setState(() {
-                    selectedSize = 'M';
+                    selectedSize = 'M'; // Reset to default
                   });
-                  Navigator.pop(context); // Close dialog
+                  Navigator.pop(context);
                 }
               }
             },
             child: const Text("Save"),
           ),
+          // ElevatedButton(
+          //   onPressed: () async {
+          //
+          //
+          //     final customerPhone = customerPhoneController.text.trim();
+          //     final lockerLocation = lockerLocationController.text.trim();
+          //
+          //     if (customerPhone.isNotEmpty && lockerLocation.isNotEmpty) {
+          //       // Show loading dialog
+          //       showDialog(
+          //         context: context,
+          //         barrierDismissible: false,
+          //         builder: (_) => const AlertDialog(
+          //           content: Row(
+          //             children: [
+          //               CircularProgressIndicator(),
+          //               SizedBox(width: 20),
+          //               Text("Processing..."),
+          //             ],
+          //           ),
+          //         ),
+          //       );
+          //
+          //       final result = await fireStoreService.addPackage({
+          //         'customerPhone': customerPhone,
+          //         'lockerLocation': lockerLocation,
+          //         'size': selectedSize,
+          //         'shipperPhone': widget.shipperPhone,
+          //       });
+          //
+          //       Navigator.of(context, rootNavigator: true).pop(); // Close loading
+          //
+          //       if (result != null) {
+          //         ScaffoldMessenger.of(context).showSnackBar(
+          //           SnackBar(content: Text(result)),
+          //         );
+          //       } else {
+          //         ScaffoldMessenger.of(context).showSnackBar(
+          //           const SnackBar(content: Text("Package added successfully")),
+          //         );
+          //         customerPhoneController.clear();
+          //         lockerLocationController.clear();
+          //         setState(() {
+          //           selectedSize = 'M';
+          //         });
+          //         Navigator.pop(context); // Close dialog
+          //       }
+          //     }
+          //   },
+          //   child: const Text("Save"),
+          // ),
         ],
       ),
     );
